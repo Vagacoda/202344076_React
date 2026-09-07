@@ -14,7 +14,8 @@ const StudentPage = () => {
         <div className='box'>
             <h1>학생목록</h1>
             {students.map(stu=>
-                <Student student={stu}/>)}
+                <Student key={stu.id}
+                student={stu}/>)}
         </div>
     )
 }

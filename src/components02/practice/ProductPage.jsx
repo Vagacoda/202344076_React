@@ -6,15 +6,23 @@ import Product from './Product'
 import '../Style02.css'
 
 const products = [
-    { id:1, name:'삼성 세탁기', price:2500000, description:'다채로운 색상 조합은 어느 공간에서나 조화롭게 어우러짐'},
-    { id:2, name:'엘지 냉장고', price:3500000, description:'AI 하이브리드 쿨링과 키친핏 디자인, 스마트싱스 연동 등 개인화 및 편의성을 극대화'},
-    { id:3, name:'삼성 스타일러', price:150000, description:'옷을 위아래로 털어주며 좌우 흔들림(트위스트)을 더해 먼지를 효과적으로 제거' },
+    {id: 1, name: '삼성 세탁기', price: 2500000, description: '다채로운 색상 조합은 어느 공간에서나 조화롭게 어우러짐'},
+    {id: 2, name: '엘지 냉장고', price: 3500000, description: 'AI 하이브리드 쿨링과 키친핏 디자인, 스마트싱스 연동 등 개인화 및 편의성을 극대화'},
+    {id: 3, name: '삼성 스타일러', price: 150000, description: '옷을 위아래로 털어주며 좌우 흔들림(트위스트)을 더해 먼지를 효과적으로 제거'},
 ]
 
 const ProductPage = () => {
     return (
         <div className='box'>
             <h1>상품목록</h1>
+            <table>
+                <tbody>
+                {
+                    products.map(pro =>
+                        <Product key={pro.id} p={pro}/>
+                    )}
+                </tbody>
+            </table>
         </div>
     )
 }
