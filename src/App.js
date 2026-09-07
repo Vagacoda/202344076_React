@@ -1,10 +1,9 @@
 import './App.css';
-import Component from './components01/practice/MainPage'
+import Component from './components02/practice/StudentPage'
 
 const App = ()=> {
     return (
         <div>
-            <Component/>
             <Component/>
         </div>
     );

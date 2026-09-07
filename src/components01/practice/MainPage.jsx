@@ -4,11 +4,20 @@
 //http://picsum.photos/960/150
 //------------------------------------------------------
 import '../Style01.css'
+import Header from './Header'
+import Content from "./Content";
+import Footer from "./Footer";
 
 const MainPage = () => {
     return (
         <div>
-            <h1>홈페이지</h1>
+            <h1 style={{
+                textAlign:'center',
+                marginTop:'50px',
+            }}>홈페이지</h1>
+            <Header/>
+            <Content/>
+            <Footer/>
         </div>
     )
 }
