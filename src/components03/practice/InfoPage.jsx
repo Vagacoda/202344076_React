@@ -7,11 +7,15 @@ import React, { useRef, useState } from 'react'
 import '../Style03.css'
 
 const InfoPage = () => {
+    const [name, setName] = useState('Justin');
+    const [age, setAge] = useState(20);
     return (
         <div className='box'>
-            <h3>이름:? | 나이:?</h3>
-            <input placeholder='이름'/><br/>
-            <input placeholder='나이' type='number' setp={1}/><br/>
+            <h3>이름:{name}| 나이:{age}</h3>
+            <input value={name}
+                   placeholder='이름'/><br/>
+            <input value={age}
+                   type='number' setp={1}/><br/>
             <button>등록</button>
         </div>
     )
