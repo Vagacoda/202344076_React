@@ -15,6 +15,10 @@ const TodoPage = () => {
             console.log(json);
         });
     }
+
+    useEffect(() => {
+        callAPI();
+    }, [])
     
     return (
         <div className='box'>

@@ -1,5 +1,5 @@
 import './App.css';
-import Component from './components04/practice/PostPage'
+import Component from './components04/practice/TodoPage'
 
 const App = ()=> {
     return (
