@@ -29,13 +29,26 @@ const PostPage = () => {
         callAPI();
     }, [page]);
 
+    const onClickTitle = (id) => {
+        setPosts(posts.map(post => post.id === id ?
+            {
+                ...post, isVisible:!post.isVisible
+            } : post));
+    }
+
     return (
         <div className='box'>
             <h1>Posts</h1>
 
             {posts.map(post => (
                 <div key={post.id}>
-                    <h5 className = 'title'>{post.id}. {post.title}</h5>
+                    <h5 onClick={()=> onClickTitle(post.id)}
+                        className = 'title'>
+                        {post.id}. {post.title}
+                    </h5>
+                    {post.isVisible &&
+                    <div className={'body'}>{post.body}</div>
+                    }
                 </div>
             ))}
 
