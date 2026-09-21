@@ -8,11 +8,17 @@ import '../Style04.css'
 
 const PostPage = () => {
     const [posts, setPosts] = useState([]) //set을 붙여야함
+    const [page, setPage] = useState(1);
+    const size = 10;
     const callAPI = () => {
         fetch('https://jsonplaceholder.typicode.com/posts')
         .then(response => response.json())
         .then(json => {
             console.log(json);
+            const start = (page - 1) * size + 1;
+            const end = (page * size);
+            const data = json.filter(post => post.id>=start && post.id <= end);
+            setPosts(data); // 시험에 ( 빈칸 ) 으로 나옴
         });
     }
 
@@ -23,6 +29,13 @@ const PostPage = () => {
     return (
         <div className='box'>
             <h1>Posts</h1>
+
+            {posts.map(post => (
+                <div key={post.id}>
+                    <h5 ClassName = 'title'>{post.id}. {post.title}</h5>
+                </div>
+            ))}
+
             <PageButton/>
         </div>
     )
