@@ -51,6 +51,11 @@ const RegisterPage = () => {
     const onSubmit = (e) => {
         e.preventDefault();
 
+        if (name === '' || price === ''){
+            alert('상품멱 또는 가격을 입력하시오');
+            return;
+        }
+
         const product = {
             id: nextId.current,
             name: name,
