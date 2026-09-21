@@ -7,12 +7,19 @@ import '../Style04.css'
 import PageButton from './PageButton';
 
 const TodoPage = () => {
-    
+
+    const [todos, setTodos] = useState([])
+    const [page, setPage] = useState(1);
+    const size = 10;
     const callAPI = () => {
         fetch('https://jsonplaceholder.typicode.com/todos')
         .then(response => response.json())
         .then(json => {
             console.log(json);
+            const start = (page-1)*size+1;
+            const end = (page*size);
+            const data = json.filter(todo => todo.id >= start && todo.id <= end);
+            setTodos(json);
         });
     }
 
@@ -23,6 +30,12 @@ const TodoPage = () => {
     return (
         <div className='box'>
             <h1>Todos</h1>
+            {todos.map(todo=>
+                <div key={todo.id}>
+                    <input type = 'checkbox' checked={todo.completed}/>
+                    <span className = 'title'>{todo.id}.{todo.title}</span>
+                </div>
+            )}
             <PageButton/>
         </div>
     )
