@@ -7,6 +7,7 @@ import PageButton from './PageButton'
 import '../Style04.css'
 
 const PostPage = () => {
+    const [posts, setPosts] = useState([]) //set을 붙여야함
     const callAPI = () => {
         fetch('https://jsonplaceholder.typicode.com/posts')
         .then(response => response.json())
@@ -14,6 +15,10 @@ const PostPage = () => {
             console.log(json);
         });
     }
+
+    useEffect(() => {
+        callAPI();
+    }, []);
 
     return (
         <div className='box'>
