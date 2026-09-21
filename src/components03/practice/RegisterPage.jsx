@@ -130,14 +130,17 @@ const RegisterPage = () => {
 
             <table>
                 <tbody>
-                {products.map(p =>
+                {products.map((p, index) =>
                     <tr
                         key={p.id}
                         onContextMenu={(e) => onDelete(e, p.id)}
                     >
                         <td>{p.id}</td>
+                        <td>index+1 {p.id}</td>
                         <td>{p.name}</td>
                         <td>{p.price}</td>
+                        <td><a onClick = {()=>onDelete(p.id)}
+                        href='#'> </a>DELETE</td>
                     </tr>
                 )}
                 </tbody>
