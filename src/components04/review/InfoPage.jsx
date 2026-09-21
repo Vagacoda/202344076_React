@@ -10,10 +10,6 @@ const InforPage = () => {
     //2.처음 렌더링 될 때만 이름, 나이 출력
     //3.나이(age)가 변경될 때 마다 이름, 나이 출력
 
-    useEffect(() => {
-        console.log(name, age);
-    }, [age]) //첫번째는 함수 두번째는 배열, []안에 name, age넣으면 콘솔에 로그 찍힘
-
     return (
         <div className='box'>
             <h1>이름:{name}, 나이:{age}</h1>
