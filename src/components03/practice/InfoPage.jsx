@@ -9,14 +9,32 @@ import '../Style03.css'
 const InfoPage = () => {
     const [name, setName] = useState('Justin');
     const [age, setAge] = useState(20);
+    // 등록버튼을 클릭 클릭한경우
+    const onClickRegister = () => {
+        alert(`${name}, ${age} 정보가 등록되었음.`)
+        nameRef.current.focus();
+    }
+    const nameRef = useRef(null);
+    // 이름 입력상자에서 앤터 쳤을때 함수
+    const onKeydown = (e) => {
+        if (e.key === 'Enter') {
+            onClickRegister();
+        }
+    }
     return (
         <div className='box'>
             <h3>이름:{name}| 나이:{age}</h3>
-            <input value={name}
+            <input
+                ref={nameRef}
+                onChange={(event) => setName(event.target.value)}
+                value={name}
                    placeholder='이름'/><br/>
-            <input value={age}
+            <input
+                onKeyDown={onKeydown}
+                onChange={(e) => setAge(e.target.value)}
+                value={age}
                    type='number' setp={1}/><br/>
-            <button>등록</button>
+            <button onClick={onClickRegister}>등록</button>
         </div>
     )
 }
