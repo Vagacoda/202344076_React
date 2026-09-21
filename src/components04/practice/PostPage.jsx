@@ -9,7 +9,9 @@ import '../Style04.css'
 const PostPage = () => {
     const [posts, setPosts] = useState([]) //set을 붙여야함
     const [page, setPage] = useState(1);
-    const size = 10;
+    const size = 5;
+    const lastRef = useRef(1);
+
     const callAPI = () => {
         fetch('https://jsonplaceholder.typicode.com/posts')
         .then(response => response.json())
@@ -19,12 +21,13 @@ const PostPage = () => {
             const end = (page * size);
             const data = json.filter(post => post.id>=start && post.id <= end);
             setPosts(data); // 시험에 ( 빈칸 ) 으로 나옴
+            lastRef.current = Math.ceil(json.length / size);
         });
     }
 
     useEffect(() => {
         callAPI();
-    }, []);
+    }, [page]);
 
     return (
         <div className='box'>
@@ -32,11 +35,11 @@ const PostPage = () => {
 
             {posts.map(post => (
                 <div key={post.id}>
-                    <h5 ClassName = 'title'>{post.id}. {post.title}</h5>
+                    <h5 className = 'title'>{post.id}. {post.title}</h5>
                 </div>
             ))}
 
-            <PageButton/>
+            <PageButton last = {lastRef.current} page = {page} setPage = {setPage} />
         </div>
     )
 }
