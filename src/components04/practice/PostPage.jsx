@@ -38,7 +38,7 @@ const PostPage = () => {
 
     return (
         <div className='box'>
-            <h1>Posts</h1>
+            <h1>Posts(박인서)</h1>
 
             {posts.map(post => (
                 <div key={post.id}>
