@@ -25,20 +25,30 @@ const initState = {
     }
 }
 
+const reducer = (state, action) => {}
+
 const CartPage = () => {
     const [name, setName] = useState('삼성 세탁기');
+    const [state, dispatch] = useReducer(reducer, initState)
 
     return (
         <div className='box'>
             <div>
                 <h1>카트 목록</h1>
-                <h5>상품수:?개</h5>
+                <h5>상품수:{state.cart.count}개</h5>
                 <input value={name} onChange={(e)=>setName(e.target.value)} placeholder='상품이름'/>
                 <button >등록</button>
+                <table>
+                    <tbody>
+                        {state.cart.products.map(p=>
+
+                        )}
+                    </tbody>
+                </table>
             </div>
             <div>
                 <h1>주문 목록</h1>
-                <h5>상품수:?개</h5>
+                <h5>상품수:{state.order.count}개</h5>
             </div>
         </div>
     )

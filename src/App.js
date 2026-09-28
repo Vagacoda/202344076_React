@@ -1,5 +1,5 @@
 import './App.css';
-import Component from './components05/practice/BankPage'
+import Component from './components05/practice/CartPage'
 
 const App = ()=> {
     return (
