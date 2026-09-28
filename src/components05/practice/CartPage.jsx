@@ -25,32 +25,117 @@ const initState = {
     }
 }
 
-const reducer = (state, action) => {}
+const reducer = (state, action) => {
+    switch(action.type){
+        case ACTION_TYPE.add:
+            return {
+                ...state,
+                cart:{
+                    count:state.cart.count+1,
+                    products:[...state.cart.products, action.product]
+                }
+            }
+
+        case ACTION_TYPE.delete:
+            return {
+                ...state,
+                cart:{
+                    count:state.cart.count-1,
+                    products:state.cart.products.filter(p=>p.id!==action.product.id)
+                }
+            }
+
+        case ACTION_TYPE.order:
+            return {
+                ...state,
+                cart:{
+                    count:state.cart.count-1,
+                    products:state.cart.products.filter(p=>p.id!==action.product.id)
+                },
+                order:{
+                    count:state.order.count+1,
+                    products:[...state.order.products, action.product]
+                }
+            }
+
+        case ACTION_TYPE.cancel:
+            return {
+                ...state,
+                order:{
+                    count:state.order.count-1,
+                    products:state.order.products.filter(p=>p.id!==action.product.id)
+                },
+                cart:{
+                    count:state.cart.count+1,
+                    products:[...state.cart.products, action.product]
+                }
+            }
+
+        default:
+            return state;
+    }
+}
 
 const CartPage = () => {
     const [name, setName] = useState('삼성 세탁기');
-    const [state, dispatch] = useReducer(reducer, initState)
+    const [state, dispatch] = useReducer(reducer, initState);
+    const idRef = useRef(4)
 
     return (
         <div className='box'>
             <div>
                 <h1>카트 목록</h1>
                 <h5>상품수:{state.cart.count}개</h5>
-                <input value={name} onChange={(e)=>setName(e.target.value)} placeholder='상품이름'/>
-                <button >등록</button>
+                <input
+                    value={name}
+                    onChange={(e)=>setName(e.target.value)}
+                    placeholder='상품이름'
+                />
+                <button
+                    onClick={()=>dispatch({
+                        type:ACTION_TYPE.add,
+                        product:{
+                            id:idRef.current++,
+                            name
+                        }
+                    })}
+                >
+                    등록
+                </button>
+
                 <table>
                     <tbody>
-                        {state.cart.products.map(p=>
-
-                        )}
+                    {state.cart.products.map(p=>
+                        <Product
+                            key={p.id}
+                            product={p}
+                            type='cart'
+                            dispatch={dispatch}
+                        />
+                    )}
                     </tbody>
                 </table>
             </div>
+
             <div>
                 <h1>주문 목록</h1>
                 <h5>상품수:{state.order.count}개</h5>
+
+                <table>
+                    <tbody>
+                    {state.order.products.map(p=>
+                        <Product
+                            key={p.id}
+                            product={p}
+                            type='order'
+                            dispatch={dispatch}
+                        />
+                    )}
+                    </tbody>
+                </table>
             </div>
         </div>
     )
 }
+
 export default CartPage
