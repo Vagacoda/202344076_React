@@ -23,7 +23,7 @@ const BankPage = () => {
 
             case ACTION_TYPE.withdrawal:
                 if (state < amount) {
-                    alert('잔액이 부족합니다.')
+                    alert('There is not enough balance')
                     return state;
                 }
                 return state - amount;
@@ -32,6 +32,9 @@ const BankPage = () => {
                 return state + (state * rate);
 
             case ACTION_TYPE.close:
+                if(window.confirm('Are you sure to close?')){
+                    return 0;
+                }
                 return 0;
 
             default:
