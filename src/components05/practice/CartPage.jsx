@@ -32,7 +32,7 @@ const reducer = (state, action) => {
                 ...state,
                 cart:{
                     count:state.cart.count+1,
-                    products:[...state.cart.products, action.product]
+                    products:state.cart.products.concat(action.product)
                 }
             }
 
@@ -96,7 +96,7 @@ const CartPage = () => {
                         type:ACTION_TYPE.add,
                         product:{
                             id:idRef.current++,
-                            name
+                            name: `${name}(${idRef.current-1})`
                         }
                     })}
                 >
