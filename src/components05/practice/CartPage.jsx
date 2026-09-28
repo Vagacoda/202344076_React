@@ -84,7 +84,7 @@ const CartPage = () => {
     return (
         <div className='box'>
             <div>
-                <h1>카트 목록</h1>
+                <h1>카트 목록 박인서</h1>
                 <h5>상품수:{state.cart.count}개</h5>
                 <input
                     value={name}

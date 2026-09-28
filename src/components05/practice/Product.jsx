@@ -9,7 +9,7 @@ const Product = ({product, type, dispatch}) => {
             {type==='cart' &&
                 <td>
                     <button onClick={()=>dispatch({type:ACTION_TYPE.delete, product})}>삭제</button>
-                    <button onClick={()=>dispatch({type:ACTION_TYPE.order, product})}>주문</button>
+                    <button>주문</button>
                 </td>
             }
             {type === 'order' &&
