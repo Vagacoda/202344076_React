@@ -8,10 +8,11 @@ import '../../Style06.css'
 import Page from './Page'
 
 const RootPage = () => {
+    const [datk, setDatk] = useState(false);
     return (
-        <div>
+        <ThemeContext.Provider value={{ datk, setDatk }}>
             <Page/>
-        </div>
+        </ThemeContext.Provider>
 
     )
 }
