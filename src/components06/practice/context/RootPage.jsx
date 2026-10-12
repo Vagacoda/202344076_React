@@ -6,14 +6,18 @@
 import React, { useState } from 'react'
 import '../../Style06.css'
 import Page from './Page'
+import {UserContext} from "../../done/context/UserContext";
+import {ThemeContext} from "./ThemeContext";
 
 const RootPage = () => {
-    const [datk, setDatk] = useState(false);
+    const [dark, setDark] = useState(false);
+    const [user, setUser] = useState('');
     return (
-        <ThemeContext.Provider value={{ datk, setDatk }}>
-            <Page/>
-        </ThemeContext.Provider>
-
+        <UserContext.Provider value={{user, setUser}}>
+            <ThemeContext.Provider value={{dark, setDark}}>
+                <Page/>
+            </ThemeContext.Provider>
+        </UserContext.Provider>
     )
 }
 export default RootPage
