@@ -36,6 +36,14 @@ const reducer1 = (state, action) => {
                     products:state.cart.products.concat(action.product)
                 }
             }
+            case ACTION_TYPE.delete:
+                return {
+                    ...state,
+                    cart:{
+                        count:state.count-1,
+                        products:state.cart.products.filter(p=>p.id!==action.product.id)
+                    }
+                }
     }
 }
 
