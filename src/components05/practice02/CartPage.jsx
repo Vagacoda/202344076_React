@@ -27,12 +27,22 @@ const initState = {
 
 // 상태(state)
 const reducer1 = (state, action) => {
-
+    switch (action.type) {
+        case ACTION_TYPE.add:
+            return {
+                ...state,
+                cart:{
+                    count:state.count+1,
+                    products:state.cart.products.concat(action.product)
+                }
+            }
+    }
 }
 
 const CartPage = () => {
     const [name, setName] = useState('삼성 세탁기');
     const [state, dispatch] = useReducer(reducer1, initState);
+    const idRef = useRef(4);
 
     return (
         <div className='box'>
@@ -40,7 +50,10 @@ const CartPage = () => {
                 <h1>카트 목록</h1>
                 <h5>상품수:{state.cart.count}개</h5>
                 <input value={name} onChange={(e)=>setName(e.target.value)} placeholder='상품이름'/>
-                <button >등록</button>
+                <button onClick={()=>dispatch({
+                    type:ACTION_TYPE.add,
+                    product:{id:idRef.current++, name:name} // idRef.current++ 를 빈칸으로 내는 이러한 유형으로 나올수도
+                })}>등록</button>
                 <table>
                     <tbody>
                         {state.cart.products.map((p) => (<Product key={p.id} product={p}/>))}
@@ -51,7 +64,7 @@ const CartPage = () => {
                 <h1>주문 목록</h1>
                 <h5>상품수:{state.order.count}개</h5>
                 <table>
-                    {state.order.products.map(p=> <Product key={p.id} product={p}/>)}
+                    {state.order.products.map(p=> <Product type="order" key={p.id} product={p}/>)}
                 </table>
             </div>
         </div>
