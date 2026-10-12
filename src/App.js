@@ -1,5 +1,5 @@
 import './App.css';
-import Component from './components06/practice/props/RootPage'
+import Component from './components06/practice/context/RootPage'
 
 const App = ()=> {
     return (

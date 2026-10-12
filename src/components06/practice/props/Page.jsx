@@ -5,8 +5,8 @@ import Footer from './Footer'
 const Page = ({dark,setDark}) => {
     return (
         <div>
-            <Header/>
-            <Content/>
+            <Header dark={dark}/>
+            <Content dark={dark}/>
             <Footer dark={dark} setDark={setDark}/>
         </div>
     )
