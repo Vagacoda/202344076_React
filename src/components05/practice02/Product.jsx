@@ -1,8 +1,8 @@
-const Product = () => {
+const Product = ({product}) => {
     return (
         <tr>
-            <td width='50px'>아이디</td>
-            <td width='270px'>상품명</td>
+            <td width='50px'>{product.id}</td>
+            <td width='270px'>{product.name}</td>
         </tr>
     )
 }
