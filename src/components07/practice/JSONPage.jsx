@@ -2,6 +2,7 @@
 //--------------------------------------------------------
 import React, {useEffect, useRef, useState} from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import {Table, Button} from 'react-bootstrap';
 
 const JSONPage = () => {
     const [response, setResponse] = useState(null);
@@ -33,29 +34,35 @@ const JSONPage = () => {
 
     return (
         <div className='json'>
-            <h5>{type}JSONPlaceHolder</h5>
-            <table>
+            <h5 className='text-center mb-3'>{type}202344076박인서JSONPlaceHolder</h5>
+            <Table bordered striped hover variant='dark'>
                 <tbody>
                 {list.map(item =>
                     <tr key={item.id}>
                         <td>{item.id}</td>
-                        <td>{item.title}</td>
+                        <td className='text-truncate'>
+                            <div className='text-truncate'>{item.title}</div>
+                        </td>
                     </tr>
                 )}
                 </tbody>
-            </table>
-            <div>
-                <button
+            </Table>
+            <div className='text-center'>
+                <Button
+                    size='sm'
+                    variant='succes'
                     disabled={id === 1}
                     onClick={()=>navi(`/json/${type}?id=${id-1}`)}>
                     이전
-                </button>
+                </Button>
                 <span>{id}/{lastRef.current}</span>
-                <button
+                <Button
+                    size='sm'
+                    variant='succes'
                     disabled={id === lastRef.current}
                     onClick={()=>navi(`/json/${type}?id=${id+1}`)}>
                     다음
-                </button>
+                </Button>
             </div>
         </div>
     )
