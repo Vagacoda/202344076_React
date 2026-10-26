@@ -6,9 +6,11 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 const JSONPage = () => {
     const [response, setResponse] = useState(null);
     const {type} = useParams();
+    const [search] = useSearchParams();
+    const id = parseInt(search.get('id')) || 1;
 
     const callAPI = () => {
-        fetch(`https://jsonplaceholder.typicode.com/posts?id=1`)
+        fetch(`https://jsonplaceholder.typicode.com/${type}?id=${id}`)
             .then(response => response.json())
             .then(json => {
                 console.log(json);
@@ -18,11 +20,11 @@ const JSONPage = () => {
 
     useEffect(() => {
         callAPI();
-    }, []);
+    }, [type, id]);
 
     return (
         <div className='json'>
-            <h5>JSONPlaceHolder</h5>
+            <h5>{type}JSONPlaceHolder</h5>
             <pre>{response && JSON.stringify(response, null, 2)}</pre>
             <div>
                 <button>이전</button>

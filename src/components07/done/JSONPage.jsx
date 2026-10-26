@@ -5,7 +5,6 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 
 const JSONPage = () => {
     const [response, setResponse] = useState(null);
-    
     const { type } = useParams();
     const [search] = useSearchParams();
     const id = parseInt(search.get('id')) || 1;
