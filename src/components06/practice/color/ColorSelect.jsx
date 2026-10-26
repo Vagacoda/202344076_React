@@ -15,7 +15,7 @@ const ColorSelect = () => {
     }
     return (
         <div>
-            <h2>색상을 선택하세요.</h2>
+            <h2>색상을 선택하세요. 202344076 박인서</h2>
             <div style={{ display:'flex' }}>
                 { colors.map(color=>
                     <div onContextMenu={(e)=>onRight(e, color)}

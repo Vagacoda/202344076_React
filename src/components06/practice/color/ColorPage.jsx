@@ -4,6 +4,7 @@ import ColorSelect from './ColorSelect'
 import ColorBox from './ColorBox'
 import '../../Style06.css'
 import {ColorContext} from "./ColorContext";
+import ColorCircle from "./ColorCircle";
 
 const initColor = {
     big:'red',
@@ -33,6 +34,8 @@ const ColorPage = () => {
                 <ColorSelect/>
                 <hr/>
                 <ColorBox/>
+                <hr/>
+                <ColorCircle/>
             </div>
         </ColorContext>
     )
