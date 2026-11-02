@@ -4,41 +4,46 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Row, Col, Card } from 'react-bootstrap'
 import '../Style08.css'
 import axios from 'axios'
-import PageButton from './PageButton';
+import PageButton from './PageButton'
 
 const LayoutPage = () => {
     const [posts, setPosts] = useState([]);
     const [page, setPage] = useState(1);
     const lastRef = useRef(1);
     const size=12;
-    
+
     const callAPI = async() => {
         const url = 'https://jsonplaceholder.typicode.com/posts';
         const res = await axios.get(url);
-        console.log(res)
         const start = (page-1) * size + 1;
-        const end = page * size; 
+        const end = page * size;
         const data = res.data.filter(post=>post.id>=start && post.id<=end);
         setPosts(data);
-        lastRef.current=Math.ceil(res.data.length/size); // 마지막 페이지
+        lastRef.current=Math.ceil(res.data.length/size);
     }
 
-    useEffect(() => {
-        callAPI()
-    }, {})
+    useEffect(()=>{
+        callAPI();
+    }, [page]);
 
     return (
         <div>
-            <h1 className='text-center mx-5 px-5'
-                style = {{background:'pink'}}>게시글</h1>
+            <h1 className='my-5 text-center'>게시글</h1>
             <Row>
                 {posts.map(post=>
-                <Col>
-                    <Card.Body>
-                        <div className='body'>{post.body}</div>
-                    </Card.Body>
-                </Col>)}
+                    <Col key={post.id} xs={6} md={4} lg={3} xl={2} className='mb-3'>
+                        <Card>
+                            <Card.Body>
+                                <div className='body'>{post.body}</div>
+                            </Card.Body>
+                            <Card.Footer>
+                                <div className='title text-truncate'>{post.title}</div>
+                            </Card.Footer>
+                        </Card>
+                    </Col>
+                )}
             </Row>
+            <PageButton page={page} setPage={setPage} last={lastRef.current}/>
         </div>
     )
 }

@@ -20,10 +20,31 @@ const TablePage = () => {
         setPosts(data);
         lastRef.current=Math.ceil(res.data.length/size);
     }
+
+    useEffect(() => {
+        callAPI()
+    }, [page])
     
     return (
         <div>
-            <h1>게시글</h1>
+            <h1 className='text-center my-5'>게시글</h1>
+            <Table striped bordered striped hover variant="primary">
+                <thead>
+                    <tr className='text-center'>
+                        <td>ID</td>
+                        <td>Title</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {posts.map(post =>
+                    <tr key={post.id}>
+                        <td>{post.id}</td>
+                        <td>{post.title}</td>
+                    </tr>
+                )}
+                </tbody>
+            </Table>
+            <PageButton page={page} setPage={setPage} last={lastRef.current}></PageButton>
         </div>
     )
 }
