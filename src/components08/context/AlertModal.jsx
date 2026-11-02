@@ -22,7 +22,7 @@ const AlertModal = () => {
         <Modal show={mAlert.show} onHide={handleClose} backdrop='false' keyboard={false} style={{top:'20%'}}>
             <Modal.Header closeButton>
                 <Modal.Title>
-                    <IoIosAlert style={{color:'gray',fontSize:'40px'}}/>
+                    <IoIosAlert style={{color:'blue',fontSize:'40px'}}/>
                     <span>알림</span>
                 </Modal.Title>
             </Modal.Header>

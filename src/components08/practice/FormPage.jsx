@@ -1,3 +1,4 @@
+
 //리액트 부트스트랩->Components->Forms
 //Col 레이아웃 디자인 xs={12} md={10} lg={9} xs={8}
 import React, {useContext, useRef, useState} from 'react'
@@ -15,23 +16,45 @@ const initForm = {
 const FormPage = () => {
     const [form, setForm] = useState(initForm);
     const {id, pass, name, intro} = form;
+    const {setAlert, setConfirm} = useContext(ModalContext);
 
     const onSubmit = (e) => {
         e.preventDefault();
+        // if (id === '' || name === '' || pass === '') {
+        //     alert('Please enter your name, id, pwd');
+        //     return;
+        // }
         if (id === '' || name === '' || pass === '') {
-            alert('Please enter your name, id, pwd');
+            setAlert({
+                show:true,
+                message:'Please Enter Your name, id, pwd'
+            });
             return;
         }
-        if (window.confirm('Are you sure submit?')) {
-            console.log('join success', form);
-        }
+        // if (window.confirm('Are you sure submit?')) {
+        //     console.log('join success', form);
+        // }
+        setConfirm({
+            show:true,
+            message:'You sure Submit?',
+            action:()=>{
+                console.log('join success',form);
+            }
+        })
     }
 
     const onReset = (e) => {
         e.preventDefault();
-        if (window.confirm('Are you sure reset?')) {
-            setForm(initForm);
-        }
+        // if (window.confirm('Are you sure reset?')) {
+        //     setForm(initForm);
+        // }
+        setConfirm({
+            show:true,
+            message:'You sure Reset?',
+            action:()=>{
+                setForm(initForm);
+            }
+        })
     }
 
     const onChange = (e) => {

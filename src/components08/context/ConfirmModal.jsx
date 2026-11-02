@@ -24,7 +24,7 @@ const ConfirmModal = () => {
             <Modal show={mConfirm.show } onHide={handleClose} backdrop="static" keyboard={ false } style={{top:'20%'}}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        <GiConfirmed style={{color:'gray',fontSize:'40px'}}/>
+                        <GiConfirmed style={{color:'green',fontSize:'40px'}}/>
                         <span className='ps-3'>질의</span>
                     </Modal.Title>
                 </Modal.Header>
