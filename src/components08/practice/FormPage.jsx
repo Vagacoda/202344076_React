@@ -24,9 +24,19 @@ const FormPage = () => {
 
     return (
         <div>
-            <h1>회원가입</h1>
+            <h1 className='text-center my-5'>회원가입</h1>
             <Row className='justify-content-center'>
                 <Col xs={12} md={10} lg={9} xl={8}>
+                    <Form className='p-3'>
+                        <InputGroup className="mb-2">
+                            <InputGroup.Text>아이디</InputGroup.Text>
+                            <Form.Control/>
+                        </InputGroup>
+                        <InputGroup className="mb-2">
+                            <InputGroup.Text>비밀번호</InputGroup.Text>
+                            <Form.Control type='password'/>
+                        </InputGroup>
+                    </Form>
                 </Col>
             </Row>
         </div>
