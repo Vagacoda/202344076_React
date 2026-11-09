@@ -5,18 +5,21 @@
 //-------------------------------------------------------------------------------
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
-import {Row, Col, Card, Form, InputGroup, Spinner} from 'react-bootstrap'
-import {useSearchParams} from 'react-router-dom';
+import {Row, Col, Card, Form, InputGroup, Spinner, Button} from 'react-bootstrap'
+import {useNavigate, useSearchParams} from 'react-router-dom';
 import SearchForm from '../common/SearchForm';
 import PagingButton from '../common/PagingButton'
 
 const BookPage = () => {
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState(null);
+    const [text, setText] = useState('리액트');
+    const navi = useNavigate();
+    const [search] = useSearchParams();
 
     const size = 12;
-    const query = '리액트';
-    const page = 1;
+    const query = search.get('query') || '리액트'
+    const page = parseInt(search.get('page')) || 1;
 
     const callAPI = async () => {
         setLoading(true);
@@ -33,10 +36,10 @@ const BookPage = () => {
 
     useEffect(() => {
         callAPI();
-    }, [])
+    }, [page, query])
 
-    if (!response) return(
-        <div className = "text-center my-5">
+    if (!response) return (
+        <div className="text-center my-5">
             <Spinner variant="success"
                      animation="border" role="status">
                 <span className="visually-hidden">로딩중...</span>
@@ -45,11 +48,80 @@ const BookPage = () => {
     );
 
     const {meta, documents} = response;
+    const last = Math.ceil(meta.pageable_count / size);
+
+    const onSearch = (e) => {
+        e.preventDefault();
+        if (text === '') {
+            alert('검색어 입력하십시오');
+            return;
+        }
+        navi(`/book?page=1&query=${text}`)
+    }
 
     return (
         <div className='my-5'>
             <h1 className='text-center mb-5'>도서검색</h1>
+
+            <Row>
+                <Col xs={6} md={5} xl={4}>
+                    <Form onSubmit={onSearch}>
+                        <InputGroup>
+                            <Form.Control
+                                onChange={(e) => setText(e.target.value)} //이거도 시험에나옴
+                                value={text}/>
+                            <Button type='submit'>검색</Button>
+                        </InputGroup>
+                    </Form>
+                </Col>
+            </Row>
+
+            {documents.length === 0 ?
+                <div className='text-center my-5'>
+                    검색 결과가 없습니다.
+                </div>
+                :
+                <Row>
+                    {documents.map((book, index) =>
+                        <Col xs={6} md={4} lg={3} xl={2}
+                             key={book.isbn} className='mb-2'>
+                            <Card>
+                                <Card.Body>
+                                    <img src={book.thumbnail || '/NoImage.png'} width='100%' alt=''></img>
+                                </Card.Body>
+                                <Card.Footer>
+                                    <div>{index + 1}</div>
+                                    <div className='title text-truncate'>
+                                        {book.title}
+                                    </div>
+                                    <div className='text-truncate'>
+                                        {book.thumbnail}
+                                    </div>
+                                </Card.Footer>
+                            </Card>
+                        </Col>
+                    )}
+                </Row>
+            }
+
+            {last > 1 &&
+                <div className='text-center my-3'>
+                    <Button
+                        disabled={page === 1}
+                        onClick={() => navi(`/book?page=${page - 1}&query=${query}`)}
+                        variant='success'>이전</Button>
+
+                    <span className='mx-3'>{page}/{last}</span>
+
+                    <Button
+                        disabled={page === last}
+                        onClick={() => navi(`/book?page=${page + 1}&query=${query}`)}
+                        variant='success'
+                    >다음</Button>
+                </div>
+            }
         </div>
     );
 }
+
 export default BookPage
