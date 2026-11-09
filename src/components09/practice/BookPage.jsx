@@ -3,10 +3,10 @@
 //3. SearchForm 검색기능 (documents.length가 0이면 '검색 결과가 없습니다.' 메지지 출력)
 //4. 마지막 페이지가 1보다 큰 경우에만 PagingButton 컴포넌트 보이기
 //-------------------------------------------------------------------------------
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from 'axios'
-import { Row, Col, Card, Form, InputGroup } from 'react-bootstrap'
-import { useSearchParams } from 'react-router-dom';
+import {Row, Col, Card, Form, InputGroup, Spinner} from 'react-bootstrap'
+import {useSearchParams} from 'react-router-dom';
 import SearchForm from '../common/SearchForm';
 import PagingButton from '../common/PagingButton'
 
@@ -14,25 +14,37 @@ const BookPage = () => {
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState(null);
 
-    const size=12;
-    const query='리액트';
-    const page=1;
+    const size = 12;
+    const query = '리액트';
+    const page = 1;
 
-    const callAPI = async() => {
+    const callAPI = async () => {
         setLoading(true);
         const url = 'https://dapi.kakao.com/v3/search/book?target=title';
         const config = {
-            headers:{'Authorization':`KakaoAK ${process.env.REACT_APP_KAKAOAK}`},
-            params:{size, query, page}
+            headers: {'Authorization': `KakaoAK ${process.env.REACT_APP_KAKAOAK}`},
+            params: {size, query, page}
         }
         const res = await axios(url, config);
         console.log(res.data); // 시험에 나올 가능성 농후
+        setResponse(res.data);
         setLoading(false);
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         callAPI();
     }, [])
+
+    if (!response) return(
+        <div className = "text-center my-5">
+            <Spinner variant="success"
+                     animation="border" role="status">
+                <span className="visually-hidden">로딩중...</span>
+            </Spinner>
+        </div>
+    );
+
+    const {meta, documents} = response;
 
     return (
         <div className='my-5'>
