@@ -12,7 +12,7 @@ const MenuBar = () => {
                 <Navbar.Collapse id="navbarScroll">
                     <Nav className="me-auto my-2 my-lg-0" style={{maxHeight:'500px'}} navbarScroll>
                         <Nav.Link href="/book">도서검색</Nav.Link>
-                        <Nav.Link href="/shop">상품검색</Nav.Link>
+                        <Nav.Link href="/shop">장소검색</Nav.Link>
                         <Nav.Link href="/post">게시글</Nav.Link>
                         <Nav.Link href="/cart">장바구니</Nav.Link>
                         <Nav.Link href="/favorite">즐겨찾기</Nav.Link>

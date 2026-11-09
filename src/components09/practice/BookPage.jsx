@@ -87,7 +87,7 @@ const BookPage = () => {
                              key={book.isbn} className='mb-2'>
                             <Card>
                                 <Card.Body>
-                                    <img src={book.thumbnail || '/NoImage.png'} width='100%' alt=''></img>
+                                    <img src={book.thumbnail || 'http://placehold.co/100x150'} width='100%' alt=''/>
                                 </Card.Body>
                                 <Card.Footer>
                                     <div>{index + 1}</div>
