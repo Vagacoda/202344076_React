@@ -53,6 +53,7 @@ const BookPage = () => {
                         <Card>
                             <Card.Body className='position-relative'>
                                 <BookModal book={book}/>
+                                <Favorite book={book}/>
                             </Card.Body>
                             <Card.Footer>
                                 <div className='title text-truncate'>
