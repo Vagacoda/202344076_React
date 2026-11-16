@@ -8,20 +8,20 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ModalContext } from '../context/ModalContext';
-import {UserContext} from "../../components06/done/context/UserContext";
 
 const MenuBar = () => {
     const { setConfirm } = useContext(ModalContext);
     const navi = useNavigate();
-    const location = useLocation();
-    console.log(location);
+    const { pathname } = useLocation();
+
     const email = sessionStorage.getItem('email');
+
     const onLogout = () => {
-        if(window.confirm('Are you sure you want to logout?')){
+        if (window.confirm('Are you sure you want to logout?')) {
             sessionStorage.clear();
             navi('/');
         }
-    }
+    };
 
     return (
         <Navbar expand="lg" bg="primary" data-bs-theme="dark">
@@ -30,15 +30,19 @@ const MenuBar = () => {
                 <Navbar.Toggle aria-controls="navbarScroll"/>
                 <Navbar.Collapse id="navbarScroll">
                     <Nav className="me-auto my-2 my-lg-0" style={{maxHeight:'500px'}} navbarScroll>
-                        <Nav.Link href="/book">도서검색</Nav.Link>
-                        <Nav.Link href="/shop">상품검색</Nav.Link>
-                        <Nav.Link href="/post">게시글</Nav.Link>
-                        <Nav.Link href="/cart">장바구니</Nav.Link>
-                        <Nav.Link href="/favorite">즐겨찾기</Nav.Link>
+                        <Nav.Link className={pathname === '/book' ? 'active' : ''} href="/book">도서검색</Nav.Link>
+                        <Nav.Link className={pathname === '/shop' ? 'active' : ''} href="/shop">상품검색</Nav.Link>
+                        <Nav.Link className={pathname === '/post' ? 'active' : ''} href="/post">게시글</Nav.Link>
+                        {email &&
+                            <>
+                                <Nav.Link href="/cart" className={pathname==='/cart' && 'active'}>장바구니</Nav.Link>
+                                <Nav.Link href="/favorite" className={pathname==='/favorite' && 'active'}>즐겨찾기</Nav.Link>
+                            </>
+                        }
                     </Nav>
                     {email ?
                         <Nav>
-                            <Nav.Link className='active' href="#">{email}</Nav.Link>
+                            <Nav.Link className="active" href="#">{email}</Nav.Link>
                             <Nav.Link onClick={onLogout} href="#">로그아웃</Nav.Link>
                         </Nav>
                         :
@@ -50,5 +54,6 @@ const MenuBar = () => {
             </Container>
         </Navbar>
     );
-}
-export default MenuBar
+};
+
+export default MenuBar;

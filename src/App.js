@@ -1,5 +1,5 @@
 import './App.css';
-import Component from './components11/practice/MainRouter'
+import Component from './components12/done/MainRouter'
 
 const App = ()=> {
     return (
