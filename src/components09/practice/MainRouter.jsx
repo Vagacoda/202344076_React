@@ -5,6 +5,7 @@ import BookPage from './BookPage'
 import ModalProvider from '../context/ModalProvider'
 import '../Style.css'
 import { Container } from 'react-bootstrap'
+import PlacePage from "./PlacePage";
 
 const MainRouter = () => {
     return (
@@ -14,6 +15,7 @@ const MainRouter = () => {
                 <Routes>
                     <Route path='/' element={<HomePage/>}/>
                     <Route path='/book' element={<BookPage/>}/>
+                    <Route path='/shop' element={<PlacePage/>}/>
                 </Routes>
             </Container>
         </ModalProvider>
